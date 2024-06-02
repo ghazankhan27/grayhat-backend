@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  console.log("new connection");
   io.emit("connected-clients", io.engine.clientsCount);
 
   socket.on("disconnect", () => {
@@ -24,6 +25,10 @@ io.on("connection", (socket) => {
 
   socket.on("message", (value) => {
     socket.broadcast.emit("new-message", value);
+  });
+
+  socket.on("connected-user", (value) => {
+    socket.broadcast.emit("new-user", value);
   });
 });
 
