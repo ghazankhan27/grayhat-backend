@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  io.emit('connected-clients', io.engine.clientsCount)
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
