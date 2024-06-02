@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (value) => {
-    io.emit("new-message", value);
+    socket.broadcast.emit("new-message", value);
   });
 });
 
