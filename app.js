@@ -15,10 +15,11 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  io.emit('connected-clients', io.engine.clientsCount)
+  io.emit("connected-clients", io.engine.clientsCount);
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
+    io.emit("connected-clients", io.engine.clientsCount);
   });
 
   socket.on("message", (value) => {
